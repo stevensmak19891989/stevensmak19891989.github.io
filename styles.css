@@ -1,0 +1,109 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #e3f2fd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container {
+    text-align: center;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    margin-bottom: 20px;
+    width: 100%; /* Adjust width as needed */
+    max-width: 600px; /* Limit maximum width */
+}
+
+h1 {
+    font-size: 36px;
+    color: #1565c0;
+    margin-bottom: 20px;
+}
+
+button {
+    padding: 15px 30px;
+    font-size: 20px;
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+#generateBtn {
+    background-color: #1976d2;
+    color: #ffffff;
+    transition: background-color 0.3s ease;
+}
+
+#generateBtn:hover {
+    background-color: #0d47a1;
+}
+
+#resetBtn {
+    background-color: #d32f2f;
+    color: #ffffff;
+    transition: background-color 0.3s ease;
+}
+
+#resetBtn:hover {
+    background-color: #b71c1c;
+}
+
+#generatedNumber {
+    font-size: 48px;
+    font-weight: bold;
+    margin-top: 30px;
+    color: #1976d2;
+}
+
+.toggle-container, .version-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.toggle-container label, .version-container label {
+    margin-right: 10px;
+}
+
+#speechToggle {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 40px;
+    height: 20px;
+    border-radius: 10px;
+    background-color: #ccc;
+    outline: none;
+    transition: background-color 0.3s ease;
+}
+
+#speechToggle:checked {
+    background-color: #66bb6a;
+}
+
+#speechToggle::before {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: #fff;
+    transition: transform 0.3s ease;
+    transform: translateX(2px);
+}
+
+#speechToggle:checked::before {
+    transform: translateX(22px);
+}

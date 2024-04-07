@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bingo</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container-wrapper">
+        <div class="container">
+            <h1>Bingo</h1>
+            <button id="generateBtn" onclick="generateRandomNumber()">Generate Number</button>
+            <br>
+            <button id="resetBtn" onclick="resetGenerator()">Reset</button>
+            <p id="generatedNumber">Click the button to generate a random number!</p>
+        </div>
+
+        <div class="container">
+            <div class="toggle-container">
+                <label for="speechToggle">Enable Speech:</label>
+                <input type="checkbox" id="speechToggle" onclick="toggleSpeech()" checked>
+            </div>
+            <div class="version-container">
+                <label for="version">Version:</label>
+                <input type="text" id="version" value="1.0" readonly>
+            </div>
+        </div>
+    </div>
+
+    <script src="random.js"></script>
+</body>
+</html>
