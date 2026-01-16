@@ -1,0 +1,458 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #6366f1;
+    --primary-dark: #4f46e5;
+    --secondary-color: #ec4899;
+    --background: #0f172a;
+    --surface: #1e293b;
+    --surface-light: #334155;
+    --text-primary: #f1f5f9;
+    --text-secondary: #cbd5e1;
+    --success: #10b981;
+    --called: #22c55e;
+    --marked: #fbbf24;
+    --shadow: rgba(0, 0, 0, 0.3);
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, var(--background) 0%, #1a1f3a 100%);
+    color: var(--text-primary);
+    min-height: 100vh;
+    padding: 15px;
+}
+
+.player-container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 25px 20px;
+    background: var(--surface);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px var(--shadow);
+}
+
+header h1 {
+    font-size: 2rem;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 15px;
+}
+
+.game-info {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.game-mode {
+    background: var(--surface-light);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.connection-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: var(--surface-light);
+    border-radius: 20px;
+    font-size: 0.9rem;
+}
+
+.connection-status i {
+    color: var(--success);
+    animation: pulse-dot 2s infinite;
+}
+
+@keyframes pulse-dot {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+/* Current Number Display */
+.current-number-section {
+    background: var(--surface);
+    border-radius: 20px;
+    padding: 30px 20px;
+    text-align: center;
+    box-shadow: 0 10px 30px var(--shadow);
+}
+
+.label {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+
+.number-display .number {
+    font-size: 5rem;
+    font-weight: bold;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.calling-display {
+    font-size: 1.3rem;
+    color: var(--text-secondary);
+    font-style: italic;
+    margin-top: 10px;
+}
+
+/* Bingo Card */
+.card-section {
+    background: var(--surface);
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 10px 30px var(--shadow);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.card-header h2 {
+    font-size: 1.3rem;
+    color: var(--text-primary);
+}
+
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+}
+
+.btn-small {
+    background: var(--surface-light);
+    color: var(--text-primary);
+}
+
+.btn-small:hover {
+    background: var(--primary-color);
+    transform: translateY(-2px);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    color: white;
+    box-shadow: 0 5px 15px rgba(99, 102, 241, 0.4);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(99, 102, 241, 0.6);
+}
+
+.bingo-card {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.card-cell {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--surface-light);
+    border-radius: 10px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 3px solid transparent;
+}
+
+.card-cell.header {
+    background: var(--primary-color);
+    color: white;
+    cursor: default;
+    font-size: 1.2rem;
+}
+
+.card-cell.free {
+    background: var(--success);
+    color: white;
+    cursor: default;
+}
+
+.card-cell.marked {
+    background: var(--marked);
+    color: var(--background);
+    transform: scale(0.95);
+    border-color: var(--marked);
+}
+
+.card-cell.called {
+    background: var(--called);
+    color: white;
+    animation: mark-cell 0.5s ease;
+}
+
+.card-cell:not(.header):not(.free):hover {
+    transform: scale(1.05);
+}
+
+@keyframes mark-cell {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(0.95); }
+}
+
+.pattern-info {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    padding-top: 15px;
+    border-top: 2px solid var(--surface-light);
+}
+
+.pattern-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+/* Bingo Button */
+.bingo-button-section {
+    text-align: center;
+}
+
+.bingo-btn {
+    width: 100%;
+    padding: 25px;
+    font-size: 2rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 20px;
+    background: linear-gradient(135deg, #f59e0b, #dc2626);
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    box-shadow: 0 10px 30px rgba(245, 158, 11, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.bingo-btn:not(:disabled):hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(245, 158, 11, 0.6);
+}
+
+.bingo-btn:not(:disabled):active {
+    transform: translateY(-2px);
+    animation: bingo-pulse 0.5s ease;
+}
+
+.bingo-btn:disabled {
+    background: var(--surface-light);
+    cursor: not-allowed;
+    box-shadow: none;
+    opacity: 0.5;
+}
+
+@keyframes bingo-pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.bingo-help {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    margin-top: 10px;
+}
+
+/* Recent Numbers */
+.recent-numbers-section {
+    background: var(--surface);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 10px 30px var(--shadow);
+}
+
+.recent-numbers-section h3 {
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.recent-numbers {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.recent-number {
+    background: var(--surface-light);
+    padding: 10px 15px;
+    border-radius: 10px;
+    font-weight: bold;
+    color: var(--text-primary);
+    min-width: 50px;
+    text-align: center;
+}
+
+.recent-number.latest {
+    background: var(--called);
+    color: white;
+    animation: pulse 1s ease;
+}
+
+.empty-state {
+    color: var(--text-secondary);
+    font-style: italic;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Winner Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+}
+
+.modal.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.winner-content {
+    background: var(--surface);
+    border-radius: 20px;
+    padding: 40px;
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.winner-animation {
+    font-size: 5rem;
+    margin-bottom: 20px;
+    animation: trophy-bounce 1s ease infinite;
+}
+
+.winner-animation i {
+    background: linear-gradient(135deg, #fbbf24, #f59e0b);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+@keyframes trophy-bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+.winner-content h2 {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    color: var(--text-primary);
+}
+
+.winner-content p {
+    color: var(--text-secondary);
+    font-size: 1.2rem;
+    margin-bottom: 25px;
+}
+
+.winner-pattern {
+    background: var(--surface-light);
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 25px;
+    color: var(--text-primary);
+    font-weight: bold;
+}
+
+footer {
+    text-align: center;
+    margin-top: 30px;
+    padding: 15px;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 1.5rem;
+    }
+    
+    .number-display .number {
+        font-size: 3.5rem;
+    }
+    
+    .calling-display {
+        font-size: 1.1rem;
+    }
+    
+    .bingo-card {
+        gap: 6px;
+    }
+    
+    .card-cell {
+        font-size: 1.2rem;
+    }
+    
+    .bingo-btn {
+        font-size: 1.5rem;
+        padding: 20px;
+    }
+}
